@@ -11,21 +11,26 @@ class VerificationOfCalculationsTest {
 	double a = 2;
 	double b = 2;
 	String[] operators = {"+", "-", "*", "/"};
+	double[] answers = {4, 0, 4, 1};
 
 	@Test
 	void testMain() {
 		for (int i = 0; i < operators.length; i++) {
 			String[] args = {Double.toString(a), operators[i], Double.toString(b)};
 			Calculator.main(args);
+			assertEquals(answers[i], Calculator.getResult());
 		}
 		String[] noArgs = {};
 		Calculator.main(noArgs);
+		assertEquals(Double.MIN_VALUE, Calculator.getResult());
 		
 		String[] falseOp = {Double.toString(a), "b", Double.toString(b)};
 		Calculator.main(falseOp);
+		assertEquals(Double.MIN_VALUE, Calculator.getResult());
 		
 		String[] except = {"s", "/", "0"};
 		Calculator.main(except);
+		assertEquals(Double.MIN_VALUE, Calculator.getResult());
 		
 	}
 
